@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52664FB02182CCEC0080E3E9 /* StudentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FAF2182CCEC0080E3E9 /* StudentController.swift */; };
+		52664FB22182CCFA0080E3E9 /* StudentEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FB12182CCFA0080E3E9 /* StudentEditController.swift */; };
+		52664FB42182CD130080E3E9 /* StudentAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FB32182CD130080E3E9 /* StudentAddController.swift */; };
+		52664FB62182E6DC0080E3E9 /* studentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FB52182E6DC0080E3E9 /* studentDataSource.swift */; };
+		52664FB821831C070080E3E9 /* ExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FB721831C070080E3E9 /* ExamController.swift */; };
+		52664FBA218320450080E3E9 /* ExamListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FB9218320450080E3E9 /* ExamListController.swift */; };
+		52664FBC218320A70080E3E9 /* ExamAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FBB218320A70080E3E9 /* ExamAddController.swift */; };
+		52664FBE218320C80080E3E9 /* ExamEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FBD218320C80080E3E9 /* ExamEditController.swift */; };
+		52664FC0218339F40080E3E9 /* ExamDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52664FBF218339F40080E3E9 /* ExamDataSource.swift */; };
 		52ECABC42182C9BA00FEEC16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ECABC32182C9BA00FEEC16 /* AppDelegate.swift */; };
 		52ECABC62182C9BA00FEEC16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ECABC52182C9BA00FEEC16 /* ViewController.swift */; };
 		52ECABC92182C9BA00FEEC16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52ECABC72182C9BA00FEEC16 /* Main.storyboard */; };
@@ -16,6 +25,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52664FAF2182CCEC0080E3E9 /* StudentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentController.swift; sourceTree = "<group>"; };
+		52664FB12182CCFA0080E3E9 /* StudentEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentEditController.swift; sourceTree = "<group>"; };
+		52664FB32182CD130080E3E9 /* StudentAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAddController.swift; sourceTree = "<group>"; };
+		52664FB52182E6DC0080E3E9 /* studentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentDataSource.swift; sourceTree = "<group>"; };
+		52664FB721831C070080E3E9 /* ExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamController.swift; sourceTree = "<group>"; };
+		52664FB9218320450080E3E9 /* ExamListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamListController.swift; sourceTree = "<group>"; };
+		52664FBB218320A70080E3E9 /* ExamAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamAddController.swift; sourceTree = "<group>"; };
+		52664FBD218320C80080E3E9 /* ExamEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEditController.swift; sourceTree = "<group>"; };
+		52664FBF218339F40080E3E9 /* ExamDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamDataSource.swift; sourceTree = "<group>"; };
 		52ECABC02182C9BA00FEEC16 /* StudentManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52ECABC32182C9BA00FEEC16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52ECABC52182C9BA00FEEC16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,12 +75,21 @@
 			isa = PBXGroup;
 			children = (
 				52ECABC32182C9BA00FEEC16 /* AppDelegate.swift */,
+				52664FB52182E6DC0080E3E9 /* studentDataSource.swift */,
+				52664FBF218339F40080E3E9 /* ExamDataSource.swift */,
 				52ECABC52182C9BA00FEEC16 /* ViewController.swift */,
 				52ECABC72182C9BA00FEEC16 /* Main.storyboard */,
 				52ECABCD2182C9BC00FEEC16 /* Assets.xcassets */,
 				52ECABCF2182C9BC00FEEC16 /* LaunchScreen.storyboard */,
 				52ECABD22182C9BC00FEEC16 /* Info.plist */,
 				52ECABCA2182C9BA00FEEC16 /* StudentManagementApp.xcdatamodeld */,
+				52664FAF2182CCEC0080E3E9 /* StudentController.swift */,
+				52664FB12182CCFA0080E3E9 /* StudentEditController.swift */,
+				52664FB32182CD130080E3E9 /* StudentAddController.swift */,
+				52664FB721831C070080E3E9 /* ExamController.swift */,
+				52664FB9218320450080E3E9 /* ExamListController.swift */,
+				52664FBB218320A70080E3E9 /* ExamAddController.swift */,
+				52664FBD218320C80080E3E9 /* ExamEditController.swift */,
 			);
 			path = StudentManagementApp;
 			sourceTree = "<group>";
@@ -139,7 +166,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				52ECABC62182C9BA00FEEC16 /* ViewController.swift in Sources */,
+				52664FC0218339F40080E3E9 /* ExamDataSource.swift in Sources */,
+				52664FBA218320450080E3E9 /* ExamListController.swift in Sources */,
+				52664FB42182CD130080E3E9 /* StudentAddController.swift in Sources */,
+				52664FB62182E6DC0080E3E9 /* studentDataSource.swift in Sources */,
+				52664FBC218320A70080E3E9 /* ExamAddController.swift in Sources */,
+				52664FB02182CCEC0080E3E9 /* StudentController.swift in Sources */,
+				52664FBE218320C80080E3E9 /* ExamEditController.swift in Sources */,
 				52ECABCC2182C9BA00FEEC16 /* StudentManagementApp.xcdatamodeld in Sources */,
+				52664FB22182CCFA0080E3E9 /* StudentEditController.swift in Sources */,
+				52664FB821831C070080E3E9 /* ExamController.swift in Sources */,
 				52ECABC42182C9BA00FEEC16 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

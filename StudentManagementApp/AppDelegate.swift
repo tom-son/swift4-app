@@ -88,6 +88,222 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    
+    func getContext () -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
+    
+    func addStudent (firstName: String, lastName: String, gender: String, course: String, age: Int, address: String) {
+        let context = getContext()
+        //retrieve the entity that we just created
+        let entity = NSEntityDescription.entity(forEntityName: "Student", in:
+            context)
+        let studentUUID = UUID().uuidString;
+        
+        let transc = NSManagedObject(entity: entity!, insertInto: context)
+        //set the entity values
+        transc.setValue(studentUUID, forKey: "studentId");
+        transc.setValue(firstName, forKey: "firstName");
+        transc.setValue(lastName, forKey: "lastName");
+        transc.setValue(gender, forKey: "gender");
+        transc.setValue(course, forKey: "course");
+        transc.setValue(age, forKey: "age");
+        transc.setValue(address, forKey: "address");
+        //save the object
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    func getStudents () -> [String] {
+        var students: [String] = []
+        //create a fetch request, telling it about the entity
+        let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
+        do {
+            //go get the results
+            let searchResults = try getContext().fetch(fetchRequest)
+            //You need to convert to NSManagedObject to use 'for' loops
+            for trans in searchResults as [NSManagedObject] {
+                let studentId = String(trans.value(forKey: "studentId") as! String )
+                let firstName = String(trans.value(forKey: "firstName") as! String)
+                let lastName = trans.value(forKey: "lastName") as! String
+    
+                students.append("\(studentId) \(firstName) \(lastName)")
+            }
+        } catch {
+            print("Error with request: \(error)")
+        }
+        return students;
+    }
 
+    func findStudent(studentId: String) -> StudentDateSource {
+        
+        let userFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student");
+        
+        userFetch.predicate = NSPredicate(format: "studentId = %@", studentId);
+        
+        let student = try! getContext().fetch(userFetch);
+        let s: Student = student.first as! Student
+        
+        let studentDataSource = StudentDateSource(studentId: s.studentId!, firstName: s.firstName!, lastName: s.lastName!, gender: s.gender!, course: s.course!, age: s.age, address: s.address!);
+
+        return studentDataSource;
+    }
+    
+    
+    func editStudent(studentId: String, firstName: String, lastName: String, gender: String, course: String, age: Int16, address: String) {
+        let userFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student");
+        
+        userFetch.predicate = NSPredicate(format: "studentId = %@", studentId);
+        
+        let student = try! getContext().fetch(userFetch);
+        let s: Student = student.first as! Student
+        
+        s.firstName = firstName;
+        s.lastName = lastName;
+        s.gender = gender;
+        s.course = course;
+        s.age = age;
+        s.address = address;
+        
+        //save the object
+        do {
+            try getContext().save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteStudent(studentId: String) {
+        let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest();
+        
+        fetchRequest.predicate = NSPredicate(format: "studentId = %@", studentId);
+        
+        let objects = try! getContext().fetch(fetchRequest);
+        
+        for obj in objects {
+            getContext().delete(obj)
+        }
+        
+        do {
+            try getContext().save() // <- remember to put this :)
+        } catch {
+            print("Error: Deleting did not save");
+        }
+    }
+    
+    
+    func addExam(studentId: String, name: String, dateTime: Date, location: String) {
+        
+        let context = getContext();
+        //retrieve the entity that we just created
+        let entity = NSEntityDescription.entity(forEntityName: "Exam", in:
+            context)
+        let examUUID = UUID().uuidString;
+        
+        let transc = NSManagedObject(entity: entity!, insertInto: context)
+        //set the entity values
+        transc.setValue(examUUID, forKey: "examId");
+        transc.setValue(studentId, forKey: "studentId");
+        transc.setValue(name, forKey: "name");
+        transc.setValue(dateTime, forKey: "dateTime");
+        transc.setValue(location, forKey: "location");
+        
+        //save the object
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    
+    func getExams(studentId: String) -> [ExamDataSource]{
+        
+        let examFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exam");
+        
+        examFetch.predicate = NSPredicate(format: "studentId = %@", studentId);
+        
+        let fetchExams = try! getContext().fetch(examFetch);
+        
+        var exams: [ExamDataSource] = []
+        
+        for trans in fetchExams as! [NSManagedObject] {
+            let examId = trans.value(forKey: "examId") as! String;
+            let name = trans.value(forKey: "name") as! String;
+            let dateTime = trans.value(forKey: "dateTime") as! Date;
+            let location = trans.value(forKey: "location") as! String;
+            
+            exams.append(ExamDataSource(examId: examId, name: name, dateTime: dateTime, location: location));
+        }
+        
+        return exams;
+    }
+    
+    
+    func getExam(examId: String) -> ExamDataSource {
+        let examFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exam");
+        
+        examFetch.predicate = NSPredicate(format: "examId = %@", examId);
+        
+        let fetchExams = try! getContext().fetch(examFetch);
+        
+        var exams: ExamDataSource!
+        
+        for trans in fetchExams as! [NSManagedObject] {
+            let examId = trans.value(forKey: "examId") as! String;
+            let name = trans.value(forKey: "name") as! String;
+            let dateTime = trans.value(forKey: "dateTime") as! Date;
+            let location = trans.value(forKey: "location") as! String;
+            
+            exams = ExamDataSource(examId: examId, name: name, dateTime: dateTime, location: location);
+        }
+        
+        return exams!;
+    }
+    
+    func editExam(examId: String, name: String, dateTime: Date, location: String) {
+        let examFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exam");
+        
+        examFetch.predicate = NSPredicate(format: "examId = %@", examId);
+        
+        let student = try! getContext().fetch(examFetch);
+        let e: Exam = student.first as! Exam
+        
+        e.name = name;
+        e.dateTime = dateTime;
+        e.location = location;
+        
+        //save the object
+        do {
+            try getContext().save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteExam(examId: String) {
+        let fetchRequest: NSFetchRequest<Exam> = Exam.fetchRequest();
+        
+        fetchRequest.predicate = NSPredicate(format: "examId = %@", examId);
+        
+        let objects = try! getContext().fetch(fetchRequest);
+        
+        for obj in objects {
+            getContext().delete(obj)
+        }
+        
+        do {
+            try getContext().save() // <- remember to put this :)
+        } catch {
+            print("Error: Deleting did not save");
+        }
+    }
 }
-
